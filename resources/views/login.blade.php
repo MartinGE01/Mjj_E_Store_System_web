@@ -3,83 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> <!-- Enlazar tu archivo CSS -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('css/alerta.js') }}"></script>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 </head>
-<style>
-        body {
-            background-color: black;
-            color: white; /* Cambiar el color del texto a blanco para que sea legible */
-        }
-    </style>
-<section class="vh-100">
-  <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-      <img src="{{ asset('images/log.png') }}" alt="Logo">
+<body>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
 
-      </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-      <form action="{{ url('/loginapi') }}" method="POST">
-    @csrf
-    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-        <p class="lead fw-normal mb-0 me-3">Inicio de Sesion</p>
-       
-    </div>
 
-    <div class="divider d-flex align-items-center my-4">
-       
-    </div>
-    @if ($errors->any())
-    <div id="error-alert" class="custom-alert">
-        {{ $errors->first('message') }}
-    </div>
-@endif
+             <div class="card">
+    <form action="{{ url('/loginapi') }}" method="POST" class="sign-in-form">
+        @csrf
+        <h2 class="title">Inicio de sesión</h2>
+        
+        @if ($errors->any())
+            <div id="error-alert" class="custom-alert">
+                {{ $errors->first('message') }}
+            </div>
+        @endif
+        
+        <script>
+            // Selecciona el elemento de la alerta
+            var errorAlert = document.getElementById('error-alert');
+            // Si la alerta existe, espera un segundo y luego la oculta
+            if (errorAlert) {
+                setTimeout(function() {
+                    errorAlert.style.display = 'none';
+                }, 2000); // 1000 milisegundos = 1 segundo
+            }
+        </script>
 
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-    <p class="text-center fw-bold mx-3 mb-0">Gmail</p>
-        <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
-            placeholder="Ingrese tu Gmail" required />
-        <label class="form-label" for="form3Example3"></label>
-    </div>
-
-    <!-- Password input -->
-    <div class="form-outline mb-3">
-    <p class="text-center fw-bold mx-3 mb-0">Contraseña</p>
-        <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
-            placeholder="Enter password" required />
-        <input type="checkbox" id="showPassword">
-        <label for="showPassword">Ver contraseña</label>
-    </div>
-
-    <div class="d-flex justify-content-between align-items-center">
-        <!-- Checkbox -->
-       
-       
-    </div>
-
-    <div class="text-center text-lg-start mt-4 pt-2">
-        <button type="submit" class="btn btn-primary btn-lg"
-            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-        <p class="small fw-bold mt-2 pt-1 mb-0"><a href="#!"
-                class="link-danger"></a></p>
-    </div>
-</form>
+        <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="email" name="email" placeholder="Email" required />
+        </div>
+        <div class="input-field">
+    <i class="fas fa-lock"></i>
+    <input type="password" name="password" id="password" placeholder="Password" required />
+    <input type="checkbox" id="togglePassword">
+    <label for="togglePassword" style="font-size: smaller;">Mostrar contraseña</label>
+</div>
 
 <script>
-    var showPassword = document.getElementById('showPassword');
-    var passwordInput = document.getElementById('form3Example4');
+    var togglePassword = document.getElementById('togglePassword');
+    var passwordInput = document.getElementById('password');
 
-    showPassword.addEventListener('change', function() {
-        if (showPassword.checked) {
+    togglePassword.addEventListener('change', function() {
+        if (togglePassword.checked) {
             passwordInput.type = 'text';
         } else {
             passwordInput.type = 'password';
@@ -87,34 +61,50 @@
     });
 </script>
 
-      </div>
-    </div>
-  </div>
-  <div
-    class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-    <!-- Copyright -->
-    <div class="text-white mb-3 mb-md-0">
-      Copyright © 2024. All rights reserved .
-    </div>
-    <!-- Copyright -->
 
-    <!-- Right -->
-    <div>
-      <a href="#!" class="text-white me-4">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="#!" class="text-white me-4">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="#!" class="text-white me-4">
-        <i class="fab fa-google"></i>
-      </a>
-      <a href="#!" class="text-white">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
+        
+        <input type="submit" value="Login" class="btn solid" />
+    </form>
+</div>
+
+                
+            </div>
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                <h3>¡Sistema Mjj_E_Store_System!</h3>
+<p>Descubre un mundo de posibilidades infinitas para tu negocio. Únete a nuestra comunidad hoy mismo y comienza tu viaje hacia el éxito. ¡No esperes más para hacer realidad tus sueños empresariales!</p>
+
+                   
+<script>
+    // Obtener el botón por su ID
+    var signUpButton = document.getElementById('sign-up-btn');
+
+    // Agregar un evento de clic al botón
+    signUpButton.addEventListener('click', function() {
+        // Redirigir a la página de registro
+        window.location.href = "{{ route('register') }}";
+    });
+</script>
+
+                </div>
+                <img src="{{ asset('images/log.png') }}" class="image" alt="">
+
+            
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3></h3>
+                    <p></p>
+                    
+                   
+                </div>
+                <img src="./img/register.svg" class="image" alt="">
+            </div>
+        </div>
     </div>
-    <!-- Right -->
-  </div>
-</section>
+    <script src="./app.js"></script>
+    <script src="./alerta.js"></script>
 </body>
 </html>
