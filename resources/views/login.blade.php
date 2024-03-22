@@ -13,92 +13,67 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-
-
-             <div class="card">
-    <form action="{{ url('/loginapi') }}" method="POST" class="sign-in-form">
-        @csrf
-        <h2 class="title">Inicio de sesión</h2>
-        
-        @if ($errors->any())
-            <div id="error-alert" class="custom-alert">
-                {{ $errors->first('message') }}
-            </div>
-        @endif
-        
-        <script>
-            // Selecciona el elemento de la alerta
-            var errorAlert = document.getElementById('error-alert');
-            // Si la alerta existe, espera un segundo y luego la oculta
-            if (errorAlert) {
-                setTimeout(function() {
-                    errorAlert.style.display = 'none';
-                }, 2000); // 1000 milisegundos = 1 segundo
-            }
-        </script>
-
-        <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="email" name="email" placeholder="Email" required />
-        </div>
-        <div class="input-field">
-    <i class="fas fa-lock"></i>
-    <input type="password" name="password" id="password" placeholder="Password" required />
-    <input type="checkbox" id="togglePassword">
-    <label for="togglePassword" style="font-size: smaller;">Mostrar contraseña</label>
-</div>
-
-<script>
-    var togglePassword = document.getElementById('togglePassword');
-    var passwordInput = document.getElementById('password');
-
-    togglePassword.addEventListener('change', function() {
-        if (togglePassword.checked) {
-            passwordInput.type = 'text';
-        } else {
-            passwordInput.type = 'password';
-        }
-    });
-</script>
-
-
-        
-        <input type="submit" value="Login" class="btn solid" />
-    </form>
-</div>
-
-                
+                <div class="card">
+                    <form action="{{ url('/loginapi') }}" method="POST" class="sign-in-form">
+                        @csrf
+                        <h2 class="title">Inicio de sesión</h2>
+                        @if ($errors->any())
+                            <div id="error-alert" class="custom-alert">
+                                {{ $errors->first('message') }}
+                            </div>
+                        @endif
+                        <script>
+                            var errorAlert = document.getElementById('error-alert');
+                            if (errorAlert) {
+                                setTimeout(function() {
+                                    errorAlert.style.display = 'none';
+                                }, 2000);
+                            }
+                        </script>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="email" name="email" placeholder="Email" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" id="password" placeholder="Password" style="margin-bottom: 10px;" required />
+                            <input type="checkbox" id="togglePassword">
+                            <label for="togglePassword" style="font-size: smaller; ">Mostrar contraseña</label>
+                        </div>
+                        <script>
+                            var togglePassword = document.getElementById('togglePassword');
+                            var passwordInput = document.getElementById('password');
+                            togglePassword.addEventListener('change', function() {
+                                if (togglePassword.checked) {
+                                    passwordInput.type = 'text';
+                                } else {
+                                    passwordInput.type = 'password';
+                                }
+                            });
+                        </script>
+                        <input type="submit" value="Login" class="btn solid"  style="margin-top: 40px;"/>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="panels-container">
             <div class="panel left-panel">
                 <div class="content">
-                <h3>¡Sistema Mjj_E_Store_System!</h3>
-<p>Descubre un mundo de posibilidades infinitas para tu negocio. Únete a nuestra comunidad hoy mismo y comienza tu viaje hacia el éxito. ¡No esperes más para hacer realidad tus sueños empresariales!</p>
-
-                   
-<script>
-    // Obtener el botón por su ID
-    var signUpButton = document.getElementById('sign-up-btn');
-
-    // Agregar un evento de clic al botón
-    signUpButton.addEventListener('click', function() {
-        // Redirigir a la página de registro
-        window.location.href = "{{ route('register') }}";
-    });
-</script>
-
+                    <h3>¡Sistema Mjj_E_Store_System!</h3>
+                    <p>Descubre un mundo de posibilidades infinitas para tu negocio. Únete a nuestra comunidad hoy mismo y comienza tu viaje hacia el éxito. ¡No esperes más para hacer realidad tus sueños empresariales!</p>
+                    <script>
+                        var signUpButton = document.getElementById('sign-up-btn');
+                        signUpButton.addEventListener('click', function() {
+                            window.location.href = "{{ route('register') }}";
+                        });
+                    </script>
                 </div>
                 <img src="{{ asset('images/log.png') }}" class="image" alt="">
-
-            
             </div>
             <div class="panel right-panel">
                 <div class="content">
                     <h3></h3>
                     <p></p>
-                    
-                   
                 </div>
                 <img src="./img/register.svg" class="image" alt="">
             </div>

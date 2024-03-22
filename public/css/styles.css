@@ -14,7 +14,7 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-image: url('https://e1.pxfuel.com/desktop-wallpaper/972/351/desktop-wallpaper-dark-blue-backgrounds-backgrounds-pinterest-3568-blue-background.jpg');
+  background-color: white;
   background-size: cover;
   min-height: 100vh;
   overflow: hidden;
@@ -29,7 +29,7 @@ input {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #000000 0%, #171818 100%);
+  background-image: linear-gradient(-45deg, #6ac158 0%, #6ac158 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -99,7 +99,7 @@ form.sign-in-form {
 .input-field i {
   text-align: center;
   line-height: 55px;
-  color: #237e18;
+  color: #000000;
   transition: 0.5s;
   font-size: 1.1rem;
 }
@@ -151,7 +151,7 @@ form.sign-in-form {
 
 .btn {
   width: 150px;
-  background-color: #5995fd;
+
   border: none;
   outline: none;
   height: 49px;
@@ -200,7 +200,7 @@ form.sign-in-form {
 }
 
 .input-field {
-  background-image: linear-gradient(to right, gray, lightgray, gray); /* Gradiente para crear la transición */
+  background-image: linear-gradient(to right, white, white); /* Gradiente para crear la transición */
   background-size: 200% auto; /* El doble del ancho del elemento */
   animation: windyBackground 5s linear infinite; /* Animación de movimiento */
 }
@@ -445,11 +445,10 @@ form.sign-in-form {
 }
 
 .card {
-  width: 400px; /* Ajusta el ancho de la tarjeta según sea necesario */
-  background-color: rgba(0, 0, 255, 0.3); /* Color de fondo azul con transparencia */
+  width: 560px; /* Ajusta el ancho de la tarjeta según sea necesario */
+  background-color: rgba(123, 124, 123, 0.8);  /* Color de fondo negro semi transparente */
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 255, 0.5); /* Sombra azul difusa */
-  padding: 20px;
+  padding: 30px;
   margin: auto;
 }
 
@@ -487,12 +486,12 @@ form.sign-in-form {
   font-size: 18px;
   font-weight: bold;
   color: #fff;
-  background-color: #007bff;
+  background-color: #6ac158;
   transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #77cd66;
 }
 
 .custom-alert {
