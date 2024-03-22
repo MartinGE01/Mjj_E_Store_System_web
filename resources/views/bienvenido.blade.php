@@ -17,22 +17,29 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 
 
-    <!-- Bootstrap Stylesheet [ REQUIRED ] -->
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="css\bootstrap.min.css" rel="stylesheet">
 
-<!-- Nifty Stylesheet [ REQUIRED ] -->
-<link href="{{ asset('css/nifty.min.css') }}" rel="stylesheet">
 
-<!-- Nifty Premium Icon [ DEMONSTRATION ] -->
-<link href="{{ asset('css/demo/nifty-demo-icons.min.css') }}" rel="stylesheet">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="css\nifty.min.css" rel="stylesheet">
 
-<!-- Pace - Page Load Progress Par [OPTIONAL] -->
-<link href="{{ asset('plugins/pace/pace.min.css') }}" rel="stylesheet">
-<script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
 
-<!-- Demo [ DEMONSTRATION ] -->
-<link href="{{ asset('css/demo/nifty-demo.min.css') }}" rel="stylesheet">
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="css\demo\nifty-demo-icons.min.css" rel="stylesheet">
 
+
+    <!--=================================================-->
+
+
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="plugins\pace\pace.min.css" rel="stylesheet">
+    <script src="plugins\pace\pace.min.js"></script>
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="css\demo\nifty-demo.min.css" rel="stylesheet">
 
 
             
