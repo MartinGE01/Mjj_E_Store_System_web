@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> <!-- Enlazar tu archivo CSS -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('css/alerta.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/stylosredes.css') }}"> 
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -36,39 +37,67 @@
                 }, 2000); // 1000 milisegundos = 1 segundo
             }
         </script>
+   <style id="estilosPersonalizados">
+    p {
+        color: #ffffff; /* Color blanco */
+        font-weight: bold; /* Texto en negrita */
+    }
+</style>
 
+<p>Correo</p>
         <div class="input-field">
+          
             <i class="fas fa-user"></i>
+         
             <input type="email" name="email" placeholder="Email" required />
         </div>
+        <p>Contraseña</p>
         <div class="input-field">
     <i class="fas fa-lock"></i>
     <input type="password" name="password" id="password" placeholder="Password" required />
-    <input type="checkbox" id="togglePassword">
-    <label for="togglePassword" style="font-size: smaller;">Mostrar contraseña</label>
+    <i id="togglePassword" class="fas fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
 </div>
 
 <script>
-    var togglePassword = document.getElementById('togglePassword');
     var passwordInput = document.getElementById('password');
+    var togglePassword = document.getElementById('togglePassword');
 
-    togglePassword.addEventListener('change', function() {
-        if (togglePassword.checked) {
+    togglePassword.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
+            togglePassword.classList.remove('fa-eye');
+            togglePassword.classList.add('fa-eye-slash');
         } else {
             passwordInput.type = 'password';
+            togglePassword.classList.remove('fa-eye-slash');
+            togglePassword.classList.add('fa-eye');
         }
     });
 </script>
 
 
+
         
         <input type="submit" value="Login" class="btn solid" />
     </form>
+
+    
 </div>
 
+    <!-- HTML -->
+    <div class="redes-sociales">
+  <p>:</p>
+  <ul>
+    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+    <li><a href="https://www.tiktok.com/"><i class="fab fa-tiktok"></i></a></li>
+    <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+    <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+  </ul>
+</div>
                 
             </div>
+            
         </div>
         <div class="panels-container">
             <div class="panel left-panel">
@@ -106,5 +135,9 @@
     </div>
     <script src="./app.js"></script>
     <script src="./alerta.js"></script>
+
+
+
+
 </body>
 </html>

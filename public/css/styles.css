@@ -14,11 +14,11 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-image: url('https://e1.pxfuel.com/desktop-wallpaper/972/351/desktop-wallpaper-dark-blue-backgrounds-backgrounds-pinterest-3568-blue-background.jpg');
-  background-size: cover;
+  background-color: #ffffff; /* Cambia el color de fondo a blanco */
   min-height: 100vh;
   overflow: hidden;
 }
+
 
 
 .container:before {
@@ -29,7 +29,7 @@ input {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #000000 0%, #171818 100%);
+  background-image: linear-gradient(-45deg, #6ac158 0%, #171818 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -99,7 +99,7 @@ form.sign-in-form {
 .input-field i {
   text-align: center;
   line-height: 55px;
-  color: #237e18;
+  color: #000000;
   transition: 0.5s;
   font-size: 1.1rem;
 }
@@ -177,17 +177,17 @@ form.sign-in-form {
   grid-template-columns: repeat(2, 1fr);
 }
 
-
 .image {
-  width: 100%;
+  width: 80%; /* Reducir el tamaño de la imagen */
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
 }
+
 /* Aplicar la animación bobea */
 @keyframes pumpImage {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% { transform: scale(0.9); } /* Hacer la imagen un poco más pequeña */
+  50% { transform: scale(1.1); }
+  100% { transform: scale(0.9); } /* Volver a tamaño original */
 }
 
 .image {
@@ -200,7 +200,7 @@ form.sign-in-form {
 }
 
 .input-field {
-  background-image: linear-gradient(to right, gray, lightgray, gray); /* Gradiente para crear la transición */
+  background-image: linear-gradient(to right, rgb(255, 255, 255), lightgray, rgb(255, 255, 255)); /* Gradiente para crear la transición */
   background-size: 200% auto; /* El doble del ancho del elemento */
   animation: windyBackground 5s linear infinite; /* Animación de movimiento */
 }
@@ -445,49 +445,47 @@ form.sign-in-form {
 }
 
 .card {
-  width: 400px; /* Ajusta el ancho de la tarjeta según sea necesario */
-  background-color: rgba(0, 0, 255, 0.3); /* Color de fondo azul con transparencia */
+  width: 600px; /* Ajusta el ancho de la tarjeta según sea necesario */
+  background-color: #515151; /* Cambia el color de fondo a gris oscuro */
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 255, 0.5); /* Sombra azul difusa */
-  padding: 20px;
+  padding: 30px; /* Aumenta el padding para hacer la tarjeta más grande y bien distribuida */
   margin: auto;
 }
 
 
 
 .title {
-  font-size: 24px;
+  font-size: 28px; /* Aumenta el tamaño del título */
   font-weight: bold;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumenta el espacio entre el título y otros elementos */
 }
 
 .input-field {
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumenta el espacio entre los campos de entrada */
 }
 
 .input-field input {
   width: 100%;
-  padding: 15px; /* Aumenté el padding para hacer los campos más grandes */
+  padding: 20px; /* Aumenta el padding de los campos de entrada */
   border: none;
   border-radius: 5px;
   outline: none;
-  font-size: 18px; /* Aumenté el tamaño de la fuente */
+  font-size: 18px;
 }
-
-
 
 .btn {
   width: 100%;
-  padding: 15px; /* Aumenté el padding del botón */
+  padding: 20px; /* Aumenta el padding del botón */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
   color: #fff;
-  background-color: #007bff;
+  background-color: #6ac158;
   transition: background-color 0.3s ease;
 }
 
@@ -496,11 +494,13 @@ form.sign-in-form {
 }
 
 .custom-alert {
-  margin-bottom: 20px;
-  padding: 10px;
+  margin-bottom: 30px; /* Aumenta el espacio entre las alertas y otros elementos */
+  padding: 15px; /* Aumenta el padding de las alertas */
   border-radius: 5px;
   color: #fff;
   background-color: #dc3545;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px; /* Ajusta el tamaño de la fuente de las alertas */
 }
+
+

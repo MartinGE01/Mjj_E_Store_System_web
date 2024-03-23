@@ -1,0 +1,39 @@
+/* CSS */
+.redes-sociales {
+  text-align: center;
+}
+
+.redes-sociales p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.redes-sociales ul {
+  list-style: none;
+  padding: 0;
+}
+
+.redes-sociales ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.redes-sociales ul li:last-child {
+  margin-right: 0;
+}
+
+.redes-sociales ul li a {
+  display: inline-block; /* Hacer que los enlaces sean elementos en línea */
+  color: #fff; /* Color del ícono */
+  font-size: 24px;
+  width: 40px; /* Ancho del círculo */
+  height: 40px; /* Altura del círculo */
+  line-height: 40px; /* Alinear verticalmente el ícono */
+  border-radius: 50%; /* Hacer que el enlace sea un círculo */
+  background-color: #007bff; /* Color de fondo del círculo */
+  text-align: center; /* Alinear el ícono horizontalmente */
+}
+
+.redes-sociales ul li a:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
