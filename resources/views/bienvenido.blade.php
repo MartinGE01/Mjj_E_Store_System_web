@@ -28,7 +28,7 @@
          <!-- end top -->
           <div class="sidebar">
 
-          <a href="#" onclick="loadDashboard()">
+        <a href="#" onclick="loadDashboard()">
               <span class="material-symbols-sharp">grid_view </span>
               <h3>Dashbord</h3>
 
@@ -38,15 +38,17 @@
     <h3>Usuario</h3>
 </a>
 
-           <a href="#">
-              <span class="material-symbols-sharp">insights </span>
-              <h3>Inventario</h3>
-           </a>
+<a href="#" onclick="loadInventario()" class="active">
+    <span class="material-symbols-sharp">insights </span>
+    <h3>Inventario</h3>
+</a>
+
        
-           <a href="#">
-              <span class="material-symbols-sharp">receipt_long </span>
-              <h3>Productos</h3>
-           </a>
+<a href="#" onclick="loadProductos()">
+    <span class="material-symbols-sharp">receipt_long </span>
+    <h3>Productos</h3>
+</a>
+
           <!--  <a href="#">
               <span class="material-symbols-sharp">report_gmailerrorred </span>
               <h3>Reports</h3>
@@ -116,7 +118,7 @@
     <div class="profile">
        <div class="info">
            <p><b>Babar</b></p>
-           <p>Admin</p>
+           <p>josue</p>
            <small class="text-muted"></small>
        </div>
        <div class="profile-photo">
@@ -168,7 +170,29 @@
             document.getElementById('main-content').innerHTML = html;
         })
         .catch(error => console.error('Error:', error));
-}
+        
+      }
+
+      function loadInventario() {
+        // Realizar petición AJAX a la ruta de Laravel que corresponde al inventario
+        fetch("{{ route('inventario') }}")
+            .then(response => response.text())
+            .then(html => {
+                // Insertar el contenido del inventario dentro del elemento <main>
+                document.getElementById('main-content').innerHTML = html;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    function loadProductos() {
+        // Realizar petición AJAX a la ruta de Laravel que corresponde a la página de productos
+        fetch("{{ route('producto') }}")
+            .then(response => response.text())
+            .then(html => {
+                // Insertar el contenido de la página de productos dentro del elemento <main>
+                document.getElementById('main-content').innerHTML = html;
+            })
+            .catch(error => console.error('Error:', error));
+    }
 
    </script>
    </div>

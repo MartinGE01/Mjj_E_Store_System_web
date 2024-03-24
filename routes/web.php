@@ -46,6 +46,15 @@ Route::get('/usuario', function () {
 })->name('usuario');
 
 
+Route::get('/inventario', function () {
+    return view('inventario');
+})->name('inventario');
+
+
+Route::get('/producto', function () {
+    return view('producto');
+})->name('producto');
+
 
 
 
