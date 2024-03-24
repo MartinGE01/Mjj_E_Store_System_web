@@ -34,26 +34,15 @@ Route::get('register', function () {
     return view('register');
 })->name('register'); // Establecer un nombre para la ruta
 
-
-Route::view('/bienvenido', 'bienvenido')->name('bienvenido');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::view('/NuevoUsuario', 'user.nuevUser')->name('NuevoUsuario');
+Route::view('/UsuariosDispon', 'user.usuario')->name('UsuariosDispon');
+Route::view('/reporteProducto', 'product.reportProd')->name('reporteProducto');
+Route::view('/nuevoProducto', 'product.nuevProd')->name('nuevoProducto');
+Route::view('/producto', 'product.producto')->name('producto');
 
-Route::get('/usuario', function () {
-    return view('usuario');
-})->name('usuario');
-
-
-Route::get('/inventario', function () {
-    return view('inventario');
-})->name('inventario');
-
-
-Route::get('/producto', function () {
-    return view('producto');
-})->name('producto');
 
 
 

@@ -200,7 +200,7 @@ form.sign-in-form {
 }
 
 .input-field {
-  background-image: linear-gradient(to right, rgb(255, 255, 255), lightgray, rgb(255, 255, 255)); /* Gradiente para crear la transición */
+  background-color: white; /* Gradiente para crear la transición */
   background-size: 200% auto; /* El doble del ancho del elemento */
   animation: windyBackground 5s linear infinite; /* Animación de movimiento */
 }

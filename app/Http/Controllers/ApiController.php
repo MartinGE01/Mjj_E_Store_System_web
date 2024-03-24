@@ -25,7 +25,7 @@ class ApiController extends Controller
             if (isset($data['token'])) {
                 // Autenticación exitosa, guardar el token en la sesión
                 session(['token' => $data['token']]);
-                return redirect()->route('bienvenido');
+                return redirect()->route('dashboard');
             } else {
                 // Autenticación fallida, mostrar mensaje de error
                 return redirect()->back()->withInput()->withErrors(['message' => 'Correo o contraseña incorrectos']);
