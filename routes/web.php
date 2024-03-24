@@ -37,6 +37,13 @@ Route::get('register', function () {
 
 Route::view('/bienvenido', 'bienvenido')->name('bienvenido');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/usuario', function () {
+    return view('usuario');
+})->name('usuario');
 
 
 
