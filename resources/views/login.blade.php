@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> <!-- Enlazar tu archivo CSS -->
     <link rel="stylesheet" href="{{ asset('css/stylosredes.css') }}">
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/') }}">
+    
 </head>
 
 <body>
