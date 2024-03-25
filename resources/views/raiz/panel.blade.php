@@ -35,8 +35,8 @@
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
                     <form method="POST" action="">
-                    @csrf
-                        <a class="dropdown-item" href="" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                    
+                    <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
                     </form>
 
                     </div>

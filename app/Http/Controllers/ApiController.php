@@ -42,4 +42,29 @@ class ApiController extends Controller
             }
         }
     }
+    public function logout()
+{
+    try {
+        $client = new Client();
+        $response = $client->get('https://prub.colegiohessen.edu.pe/api/auth/logout', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session('token'),
+            ]
+        ]);
+
+        // Verificar si la respuesta es exitosa (código 200)
+        if ($response->getStatusCode() === 200) {
+            // Borrar el token de la sesión
+            session()->forget('token');
+            return redirect()->route('login');
+        } else {
+            // Mostrar mensaje de error si la respuesta no es exitosa
+            return redirect()->back()->withErrors(['message' => 'Error al cerrar sesión. Por favor, inténtalo de nuevo más tarde.']);
+        }
+    } catch (ClientException $e) {
+        // Manejar el error según sea necesario
+        return redirect()->back()->withErrors(['message' => 'Ocurrió un error al cerrar sesión. Por favor, inténtalo de nuevo más tarde.']);
+    }
+}
+
 }
