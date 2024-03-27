@@ -8,22 +8,30 @@
     <!-- Enlazar tu archivo CSS -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
-   
-  
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <style>
         body {
-            background-color: #f5f5f5;
+            background-color: #00;
         }
 
         .form-outline {
-            border: 1px solid #d2d2d2;
+            border: none; /* Elimina el borde */
         }
 
         .form-label {
             color: #495057;
+        }
+
+        .input-group-text {
+            border: none; /* Elimina el borde */
+        }
+
+        .input-group-text i {
+            pointer-events: none; /* Evita que el icono sea clickeable */
         }
     </style>
 </head>
@@ -33,8 +41,8 @@
         <div class="row">
             <div class="col-sm-6 text-black">
                 <div class="px-5 ms-xl-4">
-                    <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
-                    <span class="h1 fw-bold mb-0">Logo</span>
+                <i class="fas fa-chart-line fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+
                 </div>
 
                 <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
@@ -46,40 +54,56 @@
                         </div>
                         @endif
 
-                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+                      <label class="formemail" for="form2Example18">Email</label>
                         <div class="form-outline mb-4">
-                           
-                            <input type="email" name="email" id="form2Example18" class="form-control form-control-lg" />
-                            <label class="form-label" for="form2Example18">Email address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-transparent border-0"><i class="fas fa-envelope"></i></span> <!-- Elimina el borde -->
+                                <input type="email" name="email" id="form2Example18" class="form-control form-control-lg" />
+                            </div>
                         </div>
+                        <label class="formpassword" for="form2Example28">Password</label>
                         <div class="form-outline mb-4">
-                            
-                            <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
-                            <label class="form-label" for="form2Example28">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-transparent border-0" onclick="togglePassword('form2Example28')"><i class="fas fa-lock"></i></span> <!-- Elimina el borde -->
+                                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
+                                <span class="input-group-text bg-transparent border-0" onclick="togglePassword('form2Example28')"><i class="fas fa-eye"></i></span> <!-- Elimina el borde -->
+                            </div>
                         </div>
                         <div class="pt-1 mb-4">
                             <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
                         </div>
-                        <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-                        <p>Don't have an account? <a href="#!" class="link-info">Register here</a></p>
+                       
+                   
                     </form>
                 </div>
             </div>
-            <div class="col-sm-6 px-0 d-none d-sm-block">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
-                    alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+            <div class="col-sm-6 px-0 d-none d-sm-block text-center">
+                <img src="{{ asset('images/log.png') }}" alt="Login image" class="img-fluid custom-img">
             </div>
         </div>
     </div>
 </body>
 <script>
-    var errorAlert = document.getElementById('error-alert');
-        if (errorAlert) {
-            setTimeout(function () {
-                errorAlert.style.display = 'none';
-            }, 2000);
+    function togglePassword(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var eyeIcon = passwordInput.nextElementSibling.querySelector("i");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
         }
+    }
+
+    var errorAlert = document.getElementById('error-alert');
+    if (errorAlert) {
+        setTimeout(function () {
+            errorAlert.style.display = 'none';
+        }, 2000);
+    }
 </script>
+
 </html>
-
-

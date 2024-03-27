@@ -12,3 +12,13 @@
   }
   }
 
+  .contenedor {
+    text-align: right; /* Alinea el contenido a la derecha */
+}
+
+.custom-img {
+    max-width: 100%; /* Opcional: para asegurarse de que la imagen no se salga del contenedor */
+    margin-left: auto; /* Centra horizontalmente */
+    margin-right: auto; /* Centra horizontalmente */
+}
+
