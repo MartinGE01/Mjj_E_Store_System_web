@@ -12,24 +12,28 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Category</th>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>precio</th>
                             <th>Stock</th>
-                            <th>Unit Price</th>
-                            <th>Sale Price</th>
-                            <th>Action</th>
+                            <th>Imagen</th>
+                            <th>Estado</th>
+                            <th>Categoria</th>
+                            <th>Funciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($productos as $producto)
                         <tr>
-                            <td>producto</td>
-                            <td>nombtre</td>
-                            <td>categoria</td>
-                            {{-- Comentario sobre la gestión del stock --}}
-                            <td>stock</td>
-                            <td>unit_price</td>
-                            <td>sales_unit_price</td>
+                            <td>{{ $producto['id'] }}</td>
+                            <td>{{ $producto['nombre'] }}</td>
+                            <td>{{ $producto['descripcion'] }}</td>
+                            <td>{{ $producto['precio'] }}</td>
+                            <td>{{ $producto['stock'] }}</td>
+                            <td><img src="https://prub.colegiohessen.edu.pe/{{ $producto['imagen'] }}" style="max-width: 100px;"></td>
+                            <td>{{ $producto['estado'] }}</td>
+                            <td>{{ $producto['categoria'] }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-info">Edit</a>
                                 <a href="#" class="btn btn-sm btn-danger">Delete</a>
@@ -37,6 +41,7 @@
                                 <a href="#" class="btn btn-sm btn-info">Purchase</a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
