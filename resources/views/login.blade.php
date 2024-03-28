@@ -15,7 +15,7 @@
 
     <style>
         body {
-            background-color: #00;
+            background-color: #ffffff;
         }
 
         .form-outline {
@@ -33,59 +33,118 @@
         .input-group-text i {
             pointer-events: none; /* Evita que el icono sea clickeable */
         }
+
+        /* Estilo para la línea inferior de los inputs */
+        .form-control {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-radius: 0;
+            border-bottom: 1px solid #ced4da; /* Color de la línea */
+            box-shadow: none;
+            padding-right: 40px; /* Espacio para el ícono */
+            position: relative;
+        }
+
+        /* Estilo para el formulario */
+        .sign-in-form {
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            margin-top: 20px;
+        }
+
+        /* Estilo para el ícono de ojo */
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            pointer-events: all; /* Permite que el ícono sea clickeable */
+        }
+
+        /* Estilo para la alerta de error */
+        .custom-alert {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+            font-size: 14px;
+            display: none;
+            z-index: 999; /* Asegura que la alerta esté por encima de otros elementos */
+        }
+
+        @media (min-width: 576px) {
+            .sign-in-form {
+                padding: 50px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 text-black">
-                <div class="px-5 ms-xl-4">
-                <i class="fas fa-chart-line fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+            <div class="col-sm-12 col-md-6 text-black">
+        
 
-                </div>
-
-                <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+                <div class="d-flex flex-column align-items-center h-custom-2 px-5 ms-xl-4 mt-4 pt-4 pt-md-0">
                     <form action="{{ url('/loginapi') }}" method="POST" class="sign-in-form">
-                        @csrf
                         @if ($errors->any())
                         <div id="error-alert" class="custom-alert">
                             {{ $errors->first('message') }}
                         </div>
                         @endif
-
-                      <label class="formemail" for="form2Example18">Email</label>
+                        @csrf
                         <div class="form-outline mb-4">
-                            <div class="input-group">
-                                <span class="input-group-text bg-transparent border-0"><i class="fas fa-envelope"></i></span> <!-- Elimina el borde -->
-                                <input type="email" name="email" id="form2Example18" class="form-control form-control-lg" style="color: black; border: 1px solid black; border-radius: 5px;" />
+                        <div class="d-flex justify-content-center align-items-center">
+    <img src="{{ asset('images/log.png') }}" alt="Imagen" style="width: 85px; height: auto;">
+</div>
 
+
+                            <div class="input-group">
+                                <span class="input-group-text bg-transparent border-0">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" name="email" id="form2Example18" class=" form-control-lg"
+                                    placeholder="Email">
                             </div>
                         </div>
-                        <label class="formpassword" for="form2Example28">Password</label>
+
                         <div class="form-outline mb-4">
                             <div class="input-group">
-                                <span class="input-group-text bg-transparent border-0" onclick="togglePassword('form2Example28')"><i class="fas fa-lock"></i></span> <!-- Elimina el borde -->
-                                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" style="color: black; border: 1px solid black; border-radius: 5px;" />
-
-                                
-                                <span class="input-group-text bg-transparent border-0" onclick="togglePassword('form2Example28')"><i class="fas fa-eye"></i></span> <!-- Elimina el borde -->
+                                <span class="input-group-text bg-transparent border-0">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" name="password" id="form2Example28"
+                                    class=" form-control-lg" placeholder="Contraseña">
+                                <span class="input-group-text bg-transparent border-0 eye-icon"
+                                    onclick="togglePassword('form2Example28')">
+                                    <i class="fas fa-eye"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="pt-1 mb-4">
                             <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
                         </div>
-                       
-                   
                     </form>
                 </div>
             </div>
-            <div class="col-sm-6 px-0 d-none d-sm-block text-center">
+            <div class="col-sm-12 col-md-6 px-0 d-none d-md-block text-center">
                 <img src="{{ asset('images/log.png') }}" alt="Login image" class="img-fluid custom-img">
             </div>
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     function togglePassword(inputId) {
         var passwordInput = document.getElementById(inputId);
@@ -101,11 +160,20 @@
         }
     }
 
+    function showErrorAlert(message) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: message,
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
+
     var errorAlert = document.getElementById('error-alert');
-    if (errorAlert) {
-        setTimeout(function () {
-            errorAlert.style.display = 'none';
-        }, 2000);
+    if (errorAlert && errorAlert.innerText.trim() !== '') {
+        // Si hay un mensaje de error, mostramos la alerta
+        showErrorAlert(errorAlert.innerText);
     }
 </script>
 
