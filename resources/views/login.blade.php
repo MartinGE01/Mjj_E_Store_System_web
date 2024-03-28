@@ -58,14 +58,17 @@
                         <div class="form-outline mb-4">
                             <div class="input-group">
                                 <span class="input-group-text bg-transparent border-0"><i class="fas fa-envelope"></i></span> <!-- Elimina el borde -->
-                                <input type="email" name="email" id="form2Example18" class="form-control form-control-lg" />
+                                <input type="email" name="email" id="form2Example18" class="form-control form-control-lg" style="color: black; border: 1px solid black; border-radius: 5px;" />
+
                             </div>
                         </div>
                         <label class="formpassword" for="form2Example28">Password</label>
                         <div class="form-outline mb-4">
                             <div class="input-group">
                                 <span class="input-group-text bg-transparent border-0" onclick="togglePassword('form2Example28')"><i class="fas fa-lock"></i></span> <!-- Elimina el borde -->
-                                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" />
+                                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg" style="color: black; border: 1px solid black; border-radius: 5px;" />
+
+                                
                                 <span class="input-group-text bg-transparent border-0" onclick="togglePassword('form2Example28')"><i class="fas fa-eye"></i></span> <!-- Elimina el borde -->
                             </div>
                         </div>
