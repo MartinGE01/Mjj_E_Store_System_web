@@ -1,11 +1,10 @@
 @extends('raiz.panel')
 
 @section('content')
-    <h1>Reporte de productos</h1>
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Products in Stock
+            Reporte de productos
         </div>
         <div class="card-body">
             <div class="table-responsive">

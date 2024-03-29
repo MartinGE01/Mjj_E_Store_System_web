@@ -25,9 +25,11 @@ Route::get('register', function () {
 
 Route::middleware([AutVist::class])->group(function () {
     // Todas las rutas dentro de este grupo requerirán autenticación
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+   Route::get('/dashboard', function () {
+    $totalProductos = app(\App\Http\Controllers\ProductoController::class)->totalProductos();
+    $totalProductosActivos = app(\App\Http\Controllers\ProductoController::class)->totalProductosActivos();
+    return view('dashboard', ['totalProductos' => $totalProductos, 'totalProductosActivos' => $totalProductosActivos]);
+})->name('dashboard');
 
     Route::view('/NuevoUsuario', 'user.nuevUser')->name('NuevoUsuario');
     Route::view('/UsuariosDispon', 'user.usuario')->name('UsuariosDispon');
