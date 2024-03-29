@@ -81,9 +81,10 @@
             <span class="icon icon-left">&#128274;</span> <!-- Icono de candado -->
             <span class="icon icon-right" onclick="togglePassword('form2Example28')">&#x1F441;</span> <!-- Icono de ojo -->
           </div>
-          <div class="pt-1 mb-4">
-            <button type="submit" class="btn-login">Login</button>
-          </div>
+          <div class="but" style="text-align: center;">
+    <button type="submit" class="btn-login">Login</button>
+</div>
+
         </form>
       </div>
     </div>
