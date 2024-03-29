@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AutVist;
 
@@ -33,6 +34,7 @@ Route::middleware([AutVist::class])->group(function () {
 
     Route::view('/NuevoUsuario', 'user.nuevUser')->name('NuevoUsuario');
     Route::view('/UsuariosDispon', 'user.usuario')->name('UsuariosDispon');
+    Route::get('/UsuariosDispon', [UserController::class, 'index'])->name('UsuariosDispon');
     Route::get('/reporte-producto', [ProductoController::class, 'index'])->name('reporteProducto');
     Route::view('/nuevoProducto', 'product.nuevProd')->name('nuevoProducto');
     Route::view('/producto', 'product.producto')->name('producto');

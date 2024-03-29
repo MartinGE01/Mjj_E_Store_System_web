@@ -19,7 +19,7 @@
                             <th>Imagen</th>
                             <th>Estado</th>
                             <th>Categoria</th>
-                            <th>Funciones</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,8 +36,6 @@
                             <td>
                                 <a href="#" class="btn btn-sm btn-info">Edit</a>
                                 <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                {{-- Botón Purchase --}}
-                                <a href="#" class="btn btn-sm btn-info">Purchase</a>
                             </td>
                         </tr>
                         @endforeach

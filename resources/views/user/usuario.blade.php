@@ -15,28 +15,31 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Company</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Action</th>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Id del rol</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                   
+                @foreach($usuarios  as $usuario)
                     <tr>
-                        <td>name </td>
-                        <td>email </td>
-                        <td>company </td>
-                        <td>address </td>
-                        <td>phone </td>
+                        <td>{{ $usuario['id'] }}</td>
+                        <td>{{ $usuario['name'] }}</td>
+                        <td>{{ $usuario['email'] }}</td>
+                        <td>{{ $usuario['departamento_id'] }}</td>
+                        <td>{{ $usuario['departamento'] }}</td>
                         <td>
-                          
+                            <a href="#" class="btn btn-sm btn-info">Edit</a>
+                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            
+                            
                         </td>
                     </tr>
-               
-                    
+                    @endforeach
                 </tbody>
             </table>
         </div>
