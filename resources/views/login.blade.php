@@ -23,6 +23,37 @@
         display: none;
         z-index: 999; /* Asegura que la alerta esté por encima de otros elementos */
     }
+
+    .textfield {
+      position: relative;
+      display: flex; /* Hacer que los elementos se alineen en línea */
+      align-items: center; /* Centrar verticalmente los elementos */
+    }
+
+    .textfield input {
+      padding-right: 35px; /* Ajuste para dejar espacio para los iconos */
+      padding-left: 30px; /* Ajuste para dejar espacio para los iconos */
+    }
+
+    .textfield .icon {
+      position: absolute;
+      color: #aaa;
+    }
+
+    .icon-left {
+      left: 5px; /* Posición del candado */
+    }
+
+    .icon-right {
+      right: 5px; /* Posición del ojo */
+      cursor: pointer;
+      font-size: 24px; /* Tamaño del icono del ojo */
+    }
+
+    /* Estilo para el texto de la contraseña tachada */
+    .password-hidden {
+      text-decoration: line-through;
+    }
   </style>
 </head>
 <body>
@@ -42,15 +73,13 @@
             @endif
           </div>
           <div class="textfield">
-            <span class="icon"><i class="fas fa-envelope"></i></span>
             <input type="email" name="email" id="form2Example18" class="form-control-lg" placeholder="Email">
+            <span class="icon icon-left">&#128231;</span> <!-- Icono de sobre -->
           </div>
           <div class="textfield">
-            <span class="icon"><i class="fas fa-lock"></i></span>
             <input type="password" name="password" id="form2Example28" class="form-control-lg" placeholder="Contraseña">
-            <span class="input-group-text bg-transparent border-0 eye-icon" onclick="togglePassword('form2Example28')">
-              <i class="fas fa-eye"></i>
-            </span>
+            <span class="icon icon-left">&#128274;</span> <!-- Icono de candado -->
+            <span class="icon icon-right" onclick="togglePassword('form2Example28')">&#x1F441;</span> <!-- Icono de ojo -->
           </div>
           <div class="pt-1 mb-4">
             <button type="submit" class="btn-login">Login</button>
@@ -75,6 +104,18 @@
     if (errorAlert && errorAlert.innerText.trim() !== '') {
         // Si hay un mensaje de error, mostramos la alerta
         showErrorAlert(errorAlert.innerText);
+    }
+
+    function togglePassword(id) {
+        var input = document.getElementById(id);
+        var icon = document.querySelector('#form2Example28 + .icon-right');
+        if (input.type === "password") {
+            input.type = "text";
+            icon.innerHTML = "&#x1F441;"; // Icono de ojo
+        } else {
+            input.type = "password";
+            icon.innerHTML = "&#x1F441;&#x0336;"; // Icono de ojo tachado
+        }
     }
   </script>
 </body>
