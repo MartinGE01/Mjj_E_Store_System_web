@@ -34,8 +34,12 @@ Route::middleware([AutVist::class])->group(function () {
 
     Route::view('/NuevoUsuario', 'user.nuevUser')->name('NuevoUsuario');
     Route::view('/UsuariosDispon', 'user.usuario')->name('UsuariosDispon');
+    /* ruta de la carptea user*/
     Route::get('/UsuariosDispon', [UserController::class, 'index'])->name('UsuariosDispon');
+    Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
+    /*rutas de la carpeta product */
     Route::get('/reporte-producto', [ProductoController::class, 'index'])->name('reporteProducto');
+    
     Route::view('/nuevoProducto', 'product.nuevProd')->name('nuevoProducto');
     Route::view('/producto', 'product.producto')->name('producto');
 });
