@@ -37,8 +37,9 @@ Route::middleware([AutVist::class])->group(function () {
     /* ruta de la carptea user*/
     Route::get('/UsuariosDispon', [UserController::class, 'index'])->name('UsuariosDispon');
     Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
-    
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/usuarios/{id}/edit', [UserController::class, 'edit'])->name('usuarios.edit');
+    Route::put('/usuarios/{id}',[UserController::class, 'udateUser'])->name('usuarios.update');
 
     
     /*rutas de la carpeta product */

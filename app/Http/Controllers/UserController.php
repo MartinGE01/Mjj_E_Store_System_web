@@ -60,8 +60,6 @@ class UserController extends Controller
             return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
         }
     }
-    
-
     public function destroy($id)
     {
         $token = session('token');
@@ -73,6 +71,46 @@ class UserController extends Controller
                 return redirect()->back()->with('success', 'Usuario eliminado satisfactoriamente');
             } else {
                 return redirect()->back()->with('error', 'Error al eliminar el usuario');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se encontró token de autenticación en la sesión');
+        }
+    }
+    public function edit($id)
+    {
+        $token = session('token');
+    
+        if ($token) {
+            $response = Http::withToken($token)->get('https://prub.colegiohessen.edu.pe/api/users/' . $id);
+    
+            if ($response->successful()) {
+                $usuario = $response->json();
+    
+                // Retorna la vista 'usuarios.edit' y pasa los datos del usuario como variable
+                return view('user.updatUser', ['usuario' => $usuario['data']]);
+            } else {
+                return redirect()->back()->with('error', 'Error al obtener los datos del usuario');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se encontró token de autenticación en la sesión');
+        }
+    }
+
+    public function udateUser(Request $request, $id)
+    {
+        $token = session('token');
+        
+        if ($token) {
+            $response = Http::withToken($token)->put('https://prub.colegiohessen.edu.pe/api/users/' . $id, [
+                'name' => $request->name,
+                'email' => $request->email,
+                'departamento_id' => $request->departamento_id,
+            ]);
+    
+            if ($response->successful()) {
+                return redirect()->back()->with('success', 'Usuario actualizado satisfactoriamente');
+            } else {
+                return redirect()->back()->with('error', 'Error al actualizar el usuario');
             }
         } else {
             return redirect()->back()->with('error', 'No se encontró token de autenticación en la sesión');

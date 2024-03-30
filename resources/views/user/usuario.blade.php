@@ -29,11 +29,11 @@
                         <td>{{ $usuario['departamento_id'] }}</td>
                         <td>{{ $usuario['departamento'] }}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-info">Edit</a>
+                            <a href="{{ route('usuarios.edit', $usuario['id']) }}" class="btn btn-sm btn-info">Actualizar</a>
                             <form id="deleteForm{{ $usuario['id'] }}" action="{{ route('usuarios.destroy', $usuario['id']) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="{{ $usuario['id'] }}">Delete</button>
+                                <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="{{ $usuario['id'] }}">Eliminar</button>
                             </form>
                         </td>
                     </tr>
