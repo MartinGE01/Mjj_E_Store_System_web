@@ -62,4 +62,20 @@ class UserController extends Controller
     }
     
 
+    public function destroy($id)
+    {
+        $token = session('token');
+        
+        if ($token) {
+            $response = Http::withToken($token)->delete('https://prub.colegiohessen.edu.pe/api/users/' . $id);
+            
+            if ($response->successful()) {
+                return redirect()->back()->with('success', 'Usuario eliminado satisfactoriamente');
+            } else {
+                return redirect()->back()->with('error', 'Error al eliminar el usuario');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se encontró token de autenticación en la sesión');
+        }
+    }
 }
