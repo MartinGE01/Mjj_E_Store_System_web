@@ -3,33 +3,35 @@
 
 
 @section('content')
-<h1>nuevo producto</h1>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
 <main>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Add New Product</h3></div>
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Nuevo Producto</h3></div>
                     <div class="card-body">
-                        <form method="POST" action="{{ url('/insert-product') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('producto.store') }}" enctype="multipart/form-data">
                         @csrf
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputFirstName">Product Code</label>
-                                        <input class="form-control py-4" name="code" type="text" placeholder="" />
+                                        <label class="small mb-1" for="inputFirstName">Nombre</label>
+                                        <input class="form-control py-4" name="nombre" type="text" placeholder="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputFirstName">Product Name</label>
-                                        <input class="form-control py-4" name="name" type="text" placeholder="" />
+                                        <label class="small mb-1" for="inputFirstName">Descripcion</label>
+                                        <input class="form-control py-4" name="descripcion" type="text" placeholder="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Category</label>
-                                        <input class="form-control py-4" name="category" type="text" placeholder="" />
+                                        <label class="small mb-1" for="inputLastName">Precio</label>
+                                        <input class="form-control py-4" name="precio" type="text" placeholder="" />
                                     </div>
                                 </div>
                                 
@@ -42,26 +44,26 @@
                                 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Buy Price (perUnit)</label>
-                                        <input class="form-control py-4" name="unit_price" type="text" placeholder="" />
+                                        <label class="small mb-1" for="inputLastName">Estado</label>
+                                        <input class="form-control py-4" name="estado" type="text" placeholder="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Sale Price(perUnit)</label>
-                                        <input class="form-control py-4" name="sale_price" type="text" placeholder="" />
+                                        <label class="small mb-1" for="inputLastName">Categoria</label>
+                                        <input class="form-control py-4" name="categoria_id" type="text" placeholder="" />
                                     </div>
                                 </div>
-
-                                <!-- <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Gallery</label>
-                                        <input name="photo" type="file" />
+                                        <label class="small mb-1" for="inputLastName">Imagen</label>
+                                        <input name="imagen" type="file" />
                                     </div>
-                                </div> -->
+                                </div> 
+                                
                             </div>
 
-                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block">Submit</button></div>
+                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
                         </form>
                     </div>
                 </div>
@@ -69,5 +71,26 @@
         </div>
     </div>
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   
+</script>
+@if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ session('error') }}'
+        });
+    </script>
+@endif
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '{{ session('success') }}'
+        });
+    </script>
+@endif
 @endsection

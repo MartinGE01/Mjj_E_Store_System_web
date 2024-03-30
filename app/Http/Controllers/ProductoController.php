@@ -67,6 +67,37 @@ class ProductoController extends Controller
         $totalProductosActivos = $data['totalProductosActivos'];
         return $totalProductosActivos;
     }
+
+    public function store(Request $request)
+    {
+        // Obtiene el token de autenticación de la sesión
+        $token = session('token');
+
+        // Verifica si el token está presente en la sesión
+        if ($token) {
+        // Realiza la solicitud HTTP con el token de autenticación
+            $response = Http::withToken($token)->post('https://prub.colegiohessen.edu.pe/api/product', [
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'precio' => $request->precio,
+                'stock' => $request->stock,
+                'imagen' => $request->imagen,
+                'estado' => $request->estado,
+                'categoria_id' => $request->categoria_id,
+            ]);
+
+            // Verifica si la solicitud fue exitosa
+            if ($response->successful()) {
+                return redirect()->back()->with('success', 'producto creado satisfactoriamente');
+            } else {
+                // Maneja el error si la solicitud no fue exitosa
+                return redirect()->back()->with('error', 'Error al crear producto');
+            }
+        } else {
+            // Maneja el caso donde no hay token de autenticación en la sesión
+            return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
+        }
+    }
     
 }
 
