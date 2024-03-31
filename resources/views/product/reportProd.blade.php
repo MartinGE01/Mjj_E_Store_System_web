@@ -14,7 +14,7 @@
                             <th>Codigo</th>
                             <th>Nombre</th>
                             <th>Descripcion</th>
-                            <th>precio</th>
+                            <th>Precio</th>
                             <th>Stock</th>
                             <th>Imagen</th>
                             <th>Estado</th>
@@ -24,20 +24,20 @@
                     </thead>
                     <tbody>
                         @foreach($productos as $producto)
-                        <tr>
-                            <td>{{ $producto['id'] }}</td>
-                            <td>{{ $producto['nombre'] }}</td>
-                            <td>{{ $producto['descripcion'] }}</td>
-                            <td>{{ $producto['precio'] }}</td>
-                            <td>{{ $producto['stock'] }}</td>
-                            <td><img src="https://prub.colegiohessen.edu.pe/{{ $producto['imagen'] }}" style="max-width: 100px;"></td>
-                            <td>{{ $producto['estado'] }}</td>
-                            <td>{{ $producto['categoria'] }}</td>
-                            <td>
-                                <a href="#" class="btn btn-sm btn-info">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>{{ $producto['id'] }}</td>
+                                <td>{{ $producto['nombre'] }}</td>
+                                <td>{{ $producto['descripcion'] }}</td>
+                                <td>{{ $producto['precio'] }}</td>
+                                <td>{{ $producto['stock'] }}</td>
+                                <td><img src="https://prub.colegiohessen.edu.pe/{{ $producto['imagen'] }}" style="max-width: 100px;"></td>
+                                <td>{{ $producto['estado'] }}</td>
+                                <td>{{ $producto['categoria'] }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info">Actualizar</button>
+                                    <button data-id="{{ $producto['id'] }}" class="btn btn-sm btn-danger delete-btn">Delete</button>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -49,6 +49,7 @@
 @section('script')
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Agregamos SweetAlert aquí -->
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     {{-- DataTables Buttons --}}
@@ -72,6 +73,53 @@
                     'pdfHtml5',
                     'print'
                 ]
+            });
+
+            // Agregar evento de clic para los botones de eliminación
+            $('.delete-btn').on('click', function() {
+                var productId = $(this).data('id');
+
+                // Mostrar SweetAlert de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede revertir",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo'
+                }).then((result) => {
+                    // Si el usuario confirma, enviar la solicitud de eliminación
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ url("productos") }}/' + productId,
+                            type: 'DELETE',
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                // Si la eliminación es exitosa, recargar la página
+                                if (response.success) {
+                                    // Mostrar alerta de éxito con SweetAlert
+                                    Swal.fire({
+                                        title: '¡Éxito!',
+                                        text: 'Producto eliminado correctamente',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    // Mostrar alerta de error con SweetAlert
+                                    Swal.fire({
+                                        title: '¡Error!',
+                                        text: 'Error al eliminar el producto',
+                                        icon: 'error'
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>

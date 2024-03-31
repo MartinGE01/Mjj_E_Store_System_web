@@ -49,5 +49,6 @@ Route::middleware([AutVist::class])->group(function () {
     Route::view('/nuevoProducto', 'product.nuevProd')->name('nuevoProducto');
     Route::view('/producto', 'product.producto')->name('producto');
 
+    Route::delete('/productos/{id}', [ProductoController::class, 'eliminarProducto'])->name('productos.eliminar');
 });
 

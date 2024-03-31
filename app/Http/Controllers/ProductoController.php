@@ -99,5 +99,21 @@ class ProductoController extends Controller
         }
     }
     
+    public function eliminarProducto($id)
+    {
+        $token = session('token');
+    
+        if ($token) {
+            $response = Http::withToken($token)->delete('https://prub.colegiohessen.edu.pe/api/product/'.$id);
+    
+            if ($response->successful()) {
+                return response()->json(['success' => true, 'message' => 'Producto eliminado correctamente']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Error al eliminar el producto'], $response->status());
+            }
+        } else {
+            return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
+        }
+    }
 }
 
