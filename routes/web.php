@@ -50,5 +50,11 @@ Route::middleware([AutVist::class])->group(function () {
     Route::view('/producto', 'product.producto')->name('producto');
 
     Route::delete('/productos/{id}', [ProductoController::class, 'eliminarProducto'])->name('productos.eliminar');
+
+
+
+    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
+Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
+
 });
 

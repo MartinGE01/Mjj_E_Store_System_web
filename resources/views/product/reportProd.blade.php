@@ -34,8 +34,8 @@
                                 <td>{{ $producto['estado'] }}</td>
                                 <td>{{ $producto['categoria'] }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-info">Actualizar</button>
-                                    <button data-id="{{ $producto['id'] }}" class="btn btn-sm btn-danger delete-btn">Delete</button>
+                                    <a href="{{ route('productos.edit', $producto['id']) }}" class="btn btn-sm btn-info">Actualizar</a>
+                                    <button data-id="{{ $producto['id'] }}" class="btn btn-sm btn-danger delete-btn">Eliminar</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -64,7 +64,7 @@
         $(document).ready(function() {
             $('#dataTable').DataTable({
                 columnDefs: [
-                    { targets: [6], orderable: false } // Desactivar la ordenación en la columna de acciones
+                    { targets: [8], orderable: false } // Desactivar la ordenación en la columna de acciones
                 ],
                 dom: 'lBfrtip',
                 buttons: [
