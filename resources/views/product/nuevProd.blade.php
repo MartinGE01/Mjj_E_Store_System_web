@@ -14,7 +14,7 @@
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Nuevo Producto</h3></div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('producto.store') }}" enctype="multipart/form-data">
-                        @csrf
+                            @csrf
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -51,7 +51,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="small mb-1" for="inputLastName">Categoria</label>
-                                        <input class="form-control py-4" name="categoria_id" type="text" placeholder="" />
+                                        <input class="form-control py-4" name="categoria_id" type="number" placeholder="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -63,7 +63,7 @@
                                 
                             </div>
 
-                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
+                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit">Registrar</button></div>
                         </form>
                     </div>
                 </div>

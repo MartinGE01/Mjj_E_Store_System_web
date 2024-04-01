@@ -4,15 +4,13 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table mr-1"></i>
-            Actualizar Producto
-        </div>
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Nuevo Producto</h3></div>
         <div class="card-body">
-        <form method="POST" action="{{ route('productos.update', $producto['id']) }}" id="userForm">
-                          
-            
+            <form method="POST" action="{{ route('productos.update', $producto['id']) }}" id="userForm">
             @csrf
                 @method('PUT')
                 <div class="form-row">
@@ -65,7 +63,9 @@
             </form>
         </div>
     </div>
-    
+    </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session('error'))
     <script>
