@@ -153,51 +153,60 @@ class ProductoController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    // Obtiene el token de autenticación de la sesión
-    $token = session('token');
-
-    // Verifica si el token está presente en la sesión
-    if ($token) {
-        // Obtener el archivo de imagen de la solicitud
-        $imagen = $request->file('imagen');
-
-        // Realiza la solicitud HTTP con el token de autenticación
-        $response = Http::withToken($token);
-
-        // Verifica si se adjuntó una nueva imagen en la solicitud
-        if ($imagen) {
-            // Adjunta la nueva imagen a la solicitud
-            $response->attach(
-                'imagen', 
-                fopen($imagen->getRealPath(), 'r'), 
-                $imagen->getClientOriginalName()
-            );
-        }
-
-        // Envía la solicitud HTTP para actualizar el producto
-        $response = $response->put('https://prub.colegiohessen.edu.pe/api/product/'. $id, [
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'precio' => $request->precio,
-            'stock' => $request->stock,
-            'estado' => $request->estado,
-            'categoria_id' => $request->categoria_id,
-        ]);
-
-        // Verifica si la solicitud fue exitosa
-        if ($response->successful()) {
-            return redirect()->back()->with('success', 'Producto actualizado satisfactoriamente');
+    {
+        // Verifica si el campo _method existe y su valor es PUT
+        if ($request->has('_method') && $request->input('_method') === 'PUT') {
+            // Obtiene el token de autenticación de la sesión
+            $token = session('token');
+    
+            // Verifica si el token está presente en la sesión
+            if ($token) {
+                // Obtener el archivo de imagen de la solicitud
+                $imagen = $request->file('imagen');
+    
+                // Realiza la solicitud HTTP con el token de autenticación
+                $response = Http::withToken($token);
+    
+                // Verifica si se adjuntó una nueva imagen en la solicitud
+                if ($imagen) {
+                    // Adjunta la nueva imagen a la solicitud
+                    $response->attach(
+                        'imagen', 
+                        fopen($imagen->getRealPath(), 'r'), 
+                        $imagen->getClientOriginalName()
+                    );
+                }
+    
+                // Agrega el campo _method con el valor PUT como encabezado
+                $response = $response->withHeaders(['X-HTTP-Method-Override' => 'PUT']);
+    
+                // Envía la solicitud HTTP para actualizar el producto
+                $response = $response->post('https://prub.colegiohessen.edu.pe/api/product/'. $id, [
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                    'precio' => $request->precio,
+                    'stock' => $request->stock,
+                    'estado' => $request->estado,
+                    'categoria_id' => $request->categoria_id,
+                ]);
+    
+                // Verifica si la solicitud fue exitosa
+                if ($response->successful()) {
+                    return redirect()->back()->with('success', 'Producto actualizado satisfactoriamente');
+                } else {
+                    // Maneja el error si la solicitud no fue exitosa
+                    return redirect()->back()->with('error', 'Error al actualizar producto: ' . $response->getBody());
+                }
+            } else {
+                // Maneja el caso donde no hay token de autenticación en la sesión
+                return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
+            }
         } else {
-            // Maneja el error si la solicitud no fue exitosa
-            return redirect()->back()->with('error', 'Error al actualizar producto');
+            // Maneja el caso donde el método no es PUT
+            return redirect()->back()->with('error', 'El método de solicitud no es PUT');
         }
-    } else {
-        // Maneja el caso donde no hay token de autenticación en la sesión
-        return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
     }
-}
-
+    
 }
 
 

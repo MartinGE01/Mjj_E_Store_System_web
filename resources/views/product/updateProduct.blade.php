@@ -10,7 +10,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Nuevo Producto</h3></div>
         <div class="card-body">
-            <form method="POST" action="{{ route('productos.update', $producto['id']) }}" id="userForm">
+            <form method="POST" action="{{ route('productos.update', $producto['id']) }}" id="userForm" enctype="multipart/form-data">
             @csrf
                 @method('PUT')
                 <div class="form-row">
