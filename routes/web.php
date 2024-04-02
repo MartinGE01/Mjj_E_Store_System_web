@@ -51,6 +51,7 @@ Route::middleware([AutVist::class])->group(function () {
     Route::view('/producto', 'product.producto')->name('producto');
 
     Route::delete('/productos/{id}', [ProductoController::class, 'eliminarProducto'])->name('productos.eliminar');
+    Route::get('/get-productos-por-categoria', [ProductoController::class, 'getProductosPorCategoria'])->name('productos.por.categoria');
 
 
 

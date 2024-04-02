@@ -37,9 +37,10 @@
                                         <label class="small mb-1" for="inputRol">Rol</label>
                                         <select class="form-control" name="departamento_id" id="inputRol" required>
                                             <option value="">Seleccionar Rol</option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Supervisor</option>
-                                            <option value="3">Usuario</option>
+                                            <option value="1">Admin</option>
+                                            <option value="2">Cajero</option>
+                                            <option value="3">Asesor de venta</option>
+                                            <option value="4">Almacenero</option>
                                             <!-- Agrega más opciones según los roles disponibles -->
                                         </select>
                                     </div>

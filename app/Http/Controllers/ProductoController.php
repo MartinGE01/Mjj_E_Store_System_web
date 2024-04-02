@@ -213,6 +213,33 @@ class ProductoController extends Controller
             return redirect()->back()->with('error', 'El método de solicitud no es PUT');
         }
     }
+    public function getProductosPorCategoria()
+    {
+        $token = session('token');
+    
+        if ($token) {
+            try {
+                // Realiza la solicitud HTTP con el token de autenticación para obtener los productos por categoría
+                $response = Http::withToken($token)->get('https://prub.colegiohessen.edu.pe/api/productbycategory');
+    
+                // Verifica si la solicitud fue exitosa
+                if ($response->successful()) {
+                    $productos = $response->json();
+                    return response()->json($productos);
+                } else {
+                    // Maneja el error si la solicitud no fue exitosa
+                    return response()->json(['error' => 'Error al obtener los productos por categoría'], $response->status());
+                }
+            } catch (\Exception $e) {
+                // Maneja cualquier excepción que pueda ocurrir durante la solicitud
+                return response()->json(['error' => 'Ocurrió un error al obtener los productos por categoría'], 500);
+            }
+        } else {
+            // Maneja el caso donde no hay token de autenticación en la sesión
+            return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
+        }
+    }
+    
 
 }
 

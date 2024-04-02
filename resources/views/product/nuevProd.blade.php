@@ -50,8 +50,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="inputLastName">Categoria</label>
-                                        <input class="form-control py-4" name="categoria_id" type="number" placeholder="" />
+                                        <label class="small mb-1" for="inputRol">Rol</label>
+                                        <select class="form-control" name="categoria_id" id="inputRol" required>
+                                            <option value="">Seleccionar Categoria</option>
+                                            <option value="1">Móvil</option>
+                                            <option value="2">Portátiles</option>
+                                            <option value="3">Dispositivo Inteligente</option>
+                                            <!-- Agrega más opciones según los roles disponibles -->
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

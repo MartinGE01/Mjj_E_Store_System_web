@@ -4,43 +4,55 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
-var myLineChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [{
-      label: "Revenue",
-      backgroundColor: "rgba(2,117,216,1)",
-      borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 6
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 15000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          display: true
-        }
-      }],
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Cantidad de productos por categoría',
+            backgroundColor: 'rgba(2,117,216,1)',
+            borderColor: 'rgba(2,117,216,1)',
+            data: []
+        }]
     },
-    legend: {
-      display: false
+    options: {
+        scales: {
+            xAxes: [{
+                time: {
+                    unit: 'month'
+                },
+                gridLines: {
+                    display: false
+                },
+                ticks: {
+                    maxTicksLimit: 6
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    maxTicksLimit: 5
+                },
+                gridLines: {
+                    display: true
+                }
+            }]
+        },
+        legend: {
+            display: false
+        }
     }
-  }
+});
+
+// Obtener los datos de getProductosPorCategoria desde el controlador
+fetch('/get-productos-por-categoria')
+.then(response => response.json())
+.then(data => {
+    // Actualizar los datos del gráfico con los datos obtenidos del controlador
+    myBarChart.data.labels = data.map(item => item.nombre);
+    myBarChart.data.datasets[0].data = data.map(item => item.count);
+    myBarChart.update();
+})
+.catch(error => {
+    console.error('Error al obtener los datos del controlador:', error);
 });
