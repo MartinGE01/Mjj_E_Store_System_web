@@ -35,7 +35,8 @@ class ProductoController extends Controller
                 return [
                     'productos' => $productos,
                     'totalProductos' => $totalProductos,
-                    'totalProductosActivos' => $totalProductosActivos
+                    'totalProductosActivos' => $totalProductosActivos,
+                    'productosActivos' => $productosActivos
                 ];
             } else {
                 // Maneja el error si la solicitud no fue exitosa
@@ -66,6 +67,12 @@ class ProductoController extends Controller
         $data = $this->obtenerProductos();
         $totalProductosActivos = $data['totalProductosActivos'];
         return $totalProductosActivos;
+    }
+    public function totalProductosDispon()
+    {
+        $data = $this->obtenerProductos();
+        $productosActivos = $data['productosActivos'];
+        return view('product.producto', compact('productosActivos'));
     }
     public function store(Request $request)
     {
@@ -206,7 +213,7 @@ class ProductoController extends Controller
             return redirect()->back()->with('error', 'El método de solicitud no es PUT');
         }
     }
-    
+
 }
 
 

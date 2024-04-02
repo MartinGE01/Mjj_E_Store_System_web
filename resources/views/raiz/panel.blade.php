@@ -60,7 +60,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('nuevoProducto') }}">Nuevo Producto</a>
                                     <a class="nav-link" href="{{ route('reporteProducto') }}">Reporte</a>
-                                    <a class="nav-link" href="{{ route('producto') }}">Productos Disponibles</a>
+                                    <a class="nav-link" href="{{ route('productoDispon') }}">Productos Disponibles</a>
                                 </nav>
                             </div>
                             

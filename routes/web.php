@@ -44,6 +44,7 @@ Route::middleware([AutVist::class])->group(function () {
     
     /*rutas de la carpeta product */
     Route::get('/reporte-producto', [ProductoController::class, 'index'])->name('reporteProducto');
+    Route::get('/producto-disponible', [ProductoController::class, 'totalProductosDispon'])->name('productoDispon');
     Route::post('/productNuev', [ProductoController::class, 'store'])->name('producto.store');
     
     Route::view('/nuevoProducto', 'product.nuevProd')->name('nuevoProducto');
