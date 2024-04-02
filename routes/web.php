@@ -56,5 +56,12 @@ Route::middleware([AutVist::class])->group(function () {
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
 Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
+/*ventas*/
+
+Route::view('/ventarealizado', 'venta.ventarealizado')->name('ventarealizado');
+Route::view('/ventapendiente', 'venta.ventapendiente')->name('ventapendiente');
+
 });
+
+
 

@@ -66,41 +66,22 @@
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Orders
+                                Ventas
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">New Order</a>
+                                    <a class="nav-link" href="{{ route('ventarealizado') }}">ventas realizadas</a>
                                 </nav>
                             </div>
                             <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">Orders List</a>
+                                    <a class="nav-link" href="{{ route('ventapendiente') }}">Ventas Pendientes</a>
                                 </nav>
                             </div>
-                            <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">Pending Orders</a>
-                                </nav>
-                            </div>
-                            <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">Delivered Orders</a>
-                                </nav>
-                            </div>
+                         
 
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvoice" aria-expanded="false" aria-controls="collapseInvoice">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Sales
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInvoice" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">New Invoice</a>
-                                    <a class="nav-link" href="">Invoices List</a>
-                                </nav>
-                            </div>
+                            
 
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAuthentication" aria-expanded="false" aria-controls="collapseAuthentication">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
