@@ -51,7 +51,10 @@
                                                     <p>{{ $producto['descripcion'] }}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${{ $producto['precio'] }}</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Comprar</a>
+                                                        
+                                                        <a href="#" id="btn-comprar" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Comprar</a>
+
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,4 +245,77 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-@endsection
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
+
+<script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona el botón "Comprar" por su ID
+        var btnComprar = document.getElementById('btn-comprar');
+
+        // Agrega un evento de clic al botón "Comprar"
+        btnComprar.addEventListener('click', function () {
+            // Muestra un cuadro de diálogo de SweetAlert con un campo de entrada para la cantidad
+            Swal.fire({
+                title: 'Ingrese la cantidad de productos',
+                input: 'number',
+                inputLabel: 'Cantidad',
+                inputAttributes: {
+                    min: '1',
+                    step: '1'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Comprar',
+                cancelButtonText: 'Cancelar',
+                showLoaderOnConfirm: true,
+                preConfirm: (cantidad) => {
+                    // Retorna una promesa resuelta con la cantidad ingresada
+                    return cantidad;
+                },
+                allowOutsideClick: () => !Swal.isLoading() // Evita que se cierre el cuadro de diálogo mientras se está cargando
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var cantidad = result.value; // Obtiene la cantidad ingresada por el usuario
+
+                    // Realiza la solicitud AJAX al controlador con la cantidad ingresada
+                    fetch('/ruta/a/venta?cantidad=' + cantidad, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Muestra la información obtenida con SweetAlert
+                        Swal.fire({
+                            title: 'Detalles del producto',
+                            html: `
+                                <p>CÓDIGO DEL PRODUCTO: ${data.codigo}</p>
+                                <p>NOMBRE DEL PRODUCTO: ${data.nombre}</p>
+                                <p>CATEGORÍA DEL PRODUCTO: ${data.categoria}</p>
+                                <p>CANTIDAD: ${cantidad}</p>
+                                <p>PRECIO UNITARIO: ${data.precio}</p>
+                                <p>TOTAL A PAGAR: ${data.total}</p>
+                            `,
+                            icon: 'info'
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'No se pudo obtener la información del producto.',
+                            icon: 'error'
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+        @endsection
