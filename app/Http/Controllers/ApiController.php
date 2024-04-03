@@ -27,6 +27,7 @@ class ApiController extends Controller
                 session(['token' => $data['token']]);
                 session(['departamento' => $data['data']['departamento']]);
                 session(['usuario' => $data['data']['user']['name']]);
+                session(['id' => $data['data']['user']['id']]);
                 return redirect()->route('dashboard');
             } else {
                 // Autenticación fallida, mostrar mensaje de error

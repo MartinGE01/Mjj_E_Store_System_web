@@ -1,6 +1,10 @@
 @extends('raiz.panel')
 
 @section('content')
+<head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+</head>
 <div class="container-fluid fruite py-5">
             <div class="container py-5">
                 <div class="tab-class text-center">
@@ -52,7 +56,7 @@
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${{ $producto['precio'] }}</p>
                                                         
-                                                        <a href="#" id="btn-comprar" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Comprar</a>
+                                                        <a href="#" data-id="{{ $producto['id'] }}" class="btn border border-secondary rounded-pill px-3 text-primary  btn-comprar"><i class="fa fa-shopping-bag me-2 text-primary"></i> Comprar</a>
 
                                                     
                                                     </div>
@@ -250,14 +254,13 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 
 <script>
-    // Espera a que el DOM esté completamente cargado
-    document.addEventListener('DOMContentLoaded', function () {
-        // Selecciona el botón "Comprar" por su ID
-        var btnComprar = document.getElementById('btn-comprar');
+     document.addEventListener('DOMContentLoaded', function () {
+    var productoDetalles; // Variable para almacenar los detalles del producto y la cantidad
 
-        // Agrega un evento de clic al botón "Comprar"
-        btnComprar.addEventListener('click', function () {
-            // Muestra un cuadro de diálogo de SweetAlert con un campo de entrada para la cantidad
+    var btnComprar = document.querySelectorAll('.btn-comprar');
+
+    btnComprar.forEach(function(btn) {
+        btn.addEventListener('click', function () {
             Swal.fire({
                 title: 'Ingrese la cantidad de productos',
                 input: 'number',
@@ -271,16 +274,15 @@
                 cancelButtonText: 'Cancelar',
                 showLoaderOnConfirm: true,
                 preConfirm: (cantidad) => {
-                    // Retorna una promesa resuelta con la cantidad ingresada
                     return cantidad;
                 },
-                allowOutsideClick: () => !Swal.isLoading() // Evita que se cierre el cuadro de diálogo mientras se está cargando
+                allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var cantidad = result.value; // Obtiene la cantidad ingresada por el usuario
+                    var cantidad = result.value;
+                    var productoId = btn.dataset.id;
 
-                    // Realiza la solicitud AJAX al controlador con la cantidad ingresada
-                    fetch('/ruta/a/venta?cantidad=' + cantidad, {
+                    fetch(`/ruta/a/venta/${productoId}?cantidad=${cantidad}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -289,19 +291,13 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        // Muestra la información obtenida con SweetAlert
-                        Swal.fire({
-                            title: 'Detalles del producto',
-                            html: `
-                                <p>CÓDIGO DEL PRODUCTO: ${data.codigo}</p>
-                                <p>NOMBRE DEL PRODUCTO: ${data.nombre}</p>
-                                <p>CATEGORÍA DEL PRODUCTO: ${data.categoria}</p>
-                                <p>CANTIDAD: ${cantidad}</p>
-                                <p>PRECIO UNITARIO: ${data.precio}</p>
-                                <p>TOTAL A PAGAR: ${data.total}</p>
-                            `,
-                            icon: 'info'
-                        });
+                        // Calcular el total a pagar y agregarlo a productoDetalles
+                        var totalPagar = data.data.precio * cantidad;
+                        productoDetalles = { ...data, cantidad: cantidad, totalPagar: totalPagar };
+                        mostrarDetallesProducto(productoDetalles);
+                        
+                        // Crear la venta utilizando los detalles del producto
+                        crearVenta(productoDetalles);
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -315,7 +311,57 @@
             });
         });
     });
+
+    // Función para mostrar los detalles del producto
+    function mostrarDetallesProducto(productoDetalles) {
+        Swal.fire({
+            title: 'Detalles del producto',
+            html: `
+            <p>CÓDIGO DEL PRODUCTO: ${productoDetalles.data.id}</p>
+            <p>NOMBRE DEL PRODUCTO: ${productoDetalles.data.nombre}</p>
+            <p>CATEGORÍA DEL PRODUCTO: ${productoDetalles.data.categoria_id}</p>
+            <p>CANTIDAD: ${productoDetalles.cantidad}</p> 
+            <p>PRECIO UNITARIO: ${productoDetalles.data.precio}</p>
+            <p>TOTAL A PAGAR: ${productoDetalles.totalPagar}</p>
+            `,
+            icon: 'info'
+        });
+    }
+
+    // Función para enviar los detalles del producto al controlador para crear la venta
+    function crearVenta(productoDetalles) {
+        fetch('/ruta/a/crear-venta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                producto_id: productoDetalles.data.id,
+                cantidad: productoDetalles.cantidad,
+                total_pagar: productoDetalles.totalPagar,
+                precio: productoDetalles.data.precio,
+            })
+        })
+        .then(response => {
+    if (!response.ok) {
+        throw new Error('La solicitud falló con un código de estado ' + response.status);
+    }
+    return response.json();
+})
+
+        .then(data => {
+            // Manejar la respuesta del servidor si es necesario
+            console.log('Respuesta del servidor:', data);
+            // Aquí puedes mostrar un mensaje de éxito o redirigir a otra página
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Aquí puedes mostrar un mensaje de error al usuario
+        });
+    }
+});
+
 </script>
-
-
-        @endsection
+@endsection

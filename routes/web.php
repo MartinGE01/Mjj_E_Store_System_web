@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AutVist;
@@ -59,7 +60,8 @@ Route::middleware([AutVist::class])->group(function () {
 Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
 /*ventas*/
-
+Route::post('/ruta/a/crear-venta', [VentaController::class, 'store']);
+Route::get('/ruta/a/venta/{id}', [VentaController::class, 'obtenerDetallesProducto']);
 Route::view('/ventarealizado', 'venta.ventarealizado')->name('ventarealizado');
 Route::view('/ventapendiente', 'venta.ventapendiente')->name('ventapendiente');
 
