@@ -71,7 +71,7 @@
                             </a>
                             <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('ventarealizado') }}">ventas realizadas</a>
+                                    <a class="nav-link" href="{{ route('ventafinalizada') }}">ventas realizadas</a>
                                 </nav>
                             </div>
                             <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">

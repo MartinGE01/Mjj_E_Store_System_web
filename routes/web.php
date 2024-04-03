@@ -60,11 +60,11 @@ Route::middleware([AutVist::class])->group(function () {
 Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
 /*ventas*/
+Route::get('/ventas-pendientes', [VentaController::class, 'index'])->name('ventapendiente');
+Route::get('/ventas-realizadas', [VentaController::class, 'finalizado'])->name('ventafinalizada');
 Route::post('/ruta/a/crear-venta', [VentaController::class, 'store']);
+Route::get('ventas/finalizar/{id}', [VentaController::class, 'finalizarVenta'])->name('ventas.finalizar');
 Route::get('/ruta/a/venta/{id}', [VentaController::class, 'obtenerDetallesProducto']);
-Route::view('/ventarealizado', 'venta.ventarealizado')->name('ventarealizado');
-Route::view('/ventapendiente', 'venta.ventapendiente')->name('ventapendiente');
-
 });
 
 

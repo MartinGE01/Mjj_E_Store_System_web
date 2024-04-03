@@ -346,7 +346,7 @@
         })
         .then(response => {
     if (!response.ok) {
-        throw new Error('La solicitud falló con un código de estado ' + response.status);
+        throw new Error('La solicitud falló con un código de estado ');
     }
     return response.json();
 })

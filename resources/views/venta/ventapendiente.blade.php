@@ -12,33 +12,33 @@
                     <thead>
                         <tr>
                             <th>Codigo</th>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            <th>Imagen</th>
-                            <th>Estado</th>
-                            <th>Categoria</th>
+                            <th> Usuario</th>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total de la Venta</th>
+                            <th>Estado </th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                      
                     <tr>
-                                <td>id</td>
-                                <td>nombre</td>
-                                <td>descripcion</td>
-                                <td>precio</td>
-                                <td>stock</td>
-                                <td><img src="https://prub.colegiohessen.edu.pe/" style="max-width: 100px;"></td>
-                                <td>estado</td>
-                                <td>categoria</td>
+                    @foreach($ventas as $venta)
+                                <td>{{ $venta['id'] }}</td>
+                                <td>{{ $venta['nombre_usuario'] }}</td>
+                                <td>{{ $venta['nombre_producto'] }}</td>
+                                <td>{{ $venta['cantidad'] }}</td>
+                                <td>${{ $venta['precio_unitario'] }}</td>
+                                <td>${{ $venta['total_venta'] }}</td>
+                                <td>{{ $venta['estado'] }}</td>
+                                <td>{{ $venta['created_at'] }}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-info">Actualizar</a>
-                                    <button data-id="" class="btn btn-sm btn-danger delete-btn">Eliminar</button>
+                                <button class="btn btn-sm btn-info finalizar-venta-btn" data-id="{{ $venta['id'] }}">Finalizar Venta</button>
                                 </td>
                             </tr>
-                   
+                            @endforeach
                     </tbody>
                 </table>
             </div>
@@ -122,5 +122,47 @@
                 });
             });
         });
+        $(document).ready(function() {
+        // Agregar evento de clic para los botones de finalizar venta
+        $('.finalizar-venta-btn').on('click', function() {
+            var ventaId = $(this).data('id');
+
+            // Mostrar SweetAlert de confirmación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¿Quieres finalizar esta venta?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, finalizarla'
+            }).then((result) => {
+                // Si el usuario confirma, enviar la solicitud de finalización de venta
+                if (result.isConfirmed) {
+                    // Redirigir a la ruta de finalizar venta con el ID de la venta
+                    window.location.href = "{{ url('ventas/finalizar') }}/" + ventaId;
+                }
+            });
+        });
+    });
     </script>
+    </script>
+@if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ session('error') }}'
+        });
+    </script>
+@endif
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '{{ session('success') }}'
+        });
+    </script>
+@endif
 @endsection

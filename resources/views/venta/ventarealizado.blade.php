@@ -4,7 +4,7 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Venta Realizado
+           Venta Realizados
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -12,33 +12,29 @@
                     <thead>
                         <tr>
                             <th>Codigo</th>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            <th>Imagen</th>
-                            <th>Estado</th>
-                            <th>Categoria</th>
-                            <th>Acciones</th>
+                            <th>Usuario</th>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total de la Venta</th>
+                            <th>Estado </th>
+                            <th>Fecha</th>
                         </tr>
                     </thead>
                     <tbody>
                      
                     <tr>
-                                <td>id</td>
-                                <td>nombre</td>
-                                <td>descripcion</td>
-                                <td>precio</td>
-                                <td>stock</td>
-                                <td><img src="https://prub.colegiohessen.edu.pe/" style="max-width: 100px;"></td>
-                                <td>estado</td>
-                                <td>categoria</td>
-                                <td>
-                                    <a href="" class="btn btn-sm btn-info">Actualizar</a>
-                                    <button data-id="" class="btn btn-sm btn-danger delete-btn">Eliminar</button>
-                                </td>
+                    @foreach($ventas as $venta)
+                                <td>{{ $venta['id'] }}</td>
+                                <td>{{ $venta['nombre_usuario'] }}</td>
+                                <td>{{ $venta['nombre_producto'] }}</td>
+                                <td>{{ $venta['cantidad'] }}</td>
+                                <td>${{ $venta['precio_unitario'] }}</td>
+                                <td>${{ $venta['total_venta'] }}</td>
+                                <td>{{ $venta['estado'] }}</td>
+                                <td>{{ $venta['created_at'] }}</td>
                             </tr>
-                   
+                            @endforeach
                     </tbody>
                 </table>
             </div>
@@ -123,4 +119,23 @@
             });
         });
     </script>
+    </script>
+@if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ session('error') }}'
+        });
+    </script>
+@endif
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '{{ session('success') }}'
+        });
+    </script>
+@endif
 @endsection
