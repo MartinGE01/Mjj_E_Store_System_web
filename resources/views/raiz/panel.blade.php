@@ -51,6 +51,7 @@
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
 
+                            @if(session('departamento') == 'Admin' || session('departamento') == 'Asesor de venta'| session('departamento') == 'Almacenero')
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Productos
@@ -63,7 +64,8 @@
                                     <a class="nav-link" href="{{ route('productoDispon') }}">Productos Disponibles</a>
                                 </nav>
                             </div>
-                            
+                            @endif
+                            @if(session('departamento') == 'Admin' || session('departamento') == 'Cajero')
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Ventas
@@ -80,9 +82,8 @@
                                 </nav>
                             </div>
                          
-
-                            
-
+                            @endif
+                            @if(session('departamento') == 'Admin')
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAuthentication" aria-expanded="false" aria-controls="collapseAuthentication">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Usuarios
@@ -98,9 +99,7 @@
                                     <a class="nav-link" href="{{ route('UsuariosDispon') }}">Usuarios Actuales</a>
                                 </nav>
                             </div>
-
-                            
-                            
+                            @endif
                     </div>
                 </nav>
             </div>

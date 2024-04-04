@@ -30,7 +30,9 @@ Route::middleware([AutVist::class])->group(function () {
    Route::get('/dashboard', function () {
     $totalProductos = app(\App\Http\Controllers\ProductoController::class)->totalProductos();
     $totalProductosActivos = app(\App\Http\Controllers\ProductoController::class)->totalProductosActivos();
-    return view('dashboard', ['totalProductos' => $totalProductos, 'totalProductosActivos' => $totalProductosActivos]);
+    $totalventasRealizadas = app(\App\Http\Controllers\VentaController::class)->totalventasRealizadas();
+    $totalventasPendientes = app(\App\Http\Controllers\VentaController::class)->totalventasPendientes();
+    return view('dashboard', ['totalProductos' => $totalProductos, 'totalProductosActivos' => $totalProductosActivos, 'totalventasRealizadas' => $totalventasRealizadas, 'totalventasPendientes' => $totalventasPendientes]);
 })->name('dashboard');
 
     Route::view('/NuevoUsuario', 'user.nuevUser')->name('NuevoUsuario');
@@ -53,18 +55,16 @@ Route::middleware([AutVist::class])->group(function () {
 
     Route::delete('/productos/{id}', [ProductoController::class, 'eliminarProducto'])->name('productos.eliminar');
     Route::get('/get-productos-por-categoria', [ProductoController::class, 'getProductosPorCategoria'])->name('productos.por.categoria');
-
-
-
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
-Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
+    Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
-/*ventas*/
-Route::get('/ventas-pendientes', [VentaController::class, 'index'])->name('ventapendiente');
-Route::get('/ventas-realizadas', [VentaController::class, 'finalizado'])->name('ventafinalizada');
-Route::post('/ruta/a/crear-venta', [VentaController::class, 'store']);
-Route::get('ventas/finalizar/{id}', [VentaController::class, 'finalizarVenta'])->name('ventas.finalizar');
-Route::get('/ruta/a/venta/{id}', [VentaController::class, 'obtenerDetallesProducto']);
+    /*ventas*/
+    Route::get('/ventas-pendientes', [VentaController::class, 'index'])->name('ventapendiente');
+    Route::get('/ventas-realizadas', [VentaController::class, 'finalizado'])->name('ventafinalizada');
+    Route::post('/ruta/a/crear-venta', [VentaController::class, 'store']);
+    Route::get('ventas/finalizar/{id}', [VentaController::class, 'finalizarVenta'])->name('ventas.finalizar');
+    Route::get('/ruta/a/venta/{id}', [VentaController::class, 'obtenerDetallesProducto']);
+    Route::get('/venta-por-dia', [VentaController::class, 'VentasDiarias'])->name('venta.por.dia');
 });
 
 

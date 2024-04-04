@@ -144,4 +144,82 @@ public function finalizarVenta($id)
     }
 }
 
+public function VentasDiarias()
+{
+    $token = session('token');
+
+    if ($token) {
+        try {
+            // Realiza la solicitud HTTP con el token de autenticación para obtener las ventas diarias
+            $response = Http::withToken($token)->get('https://prub.colegiohessen.edu.pe/api/ventdia');
+
+            // Verifica si la solicitud fue exitosa
+            if ($response->successful()) {
+                $ventasDiarias = $response->json();
+                return response()->json($ventasDiarias);
+            } else {
+                // Maneja el error si la solicitud no fue exitosa
+                return response()->json(['error' => 'Error al obtener las ventas diarias'], $response->status());
+            }
+        } catch (\Exception $e) {
+            // Maneja cualquier excepción que pueda ocurrir durante la solicitud
+            return response()->json(['error' => 'Ocurrió un error al obtener las ventas diarias'], 500);
+        }
+    } else {
+        // Maneja el caso donde no hay token de autenticación en la sesión
+        return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
+    }
+}
+
+public function vistadash()
+{
+    
+    $token = session('token');
+
+   
+    if ($token) {
+        // Realiza la solicitud HTTP con el token de autenticación
+        $response = Http::withToken($token)->get('https://prub.colegiohessen.edu.pe/api/venta');
+
+        // Verifica si la solicitud fue exitosa
+        if ($response->successful()) {
+            $ventas = $response->json();
+
+            // Filtra los usuarios para mostrar solo aquellos con estado pendiente
+            $ventasPendientes = array_filter($ventas, function($venta) {
+                return $venta['estado'] === 'pendiente';
+            });
+            // Filtra los usuarios para mostrar solo aquellos con estado pendiente
+            $ventasRealizadas = array_filter($ventas, function($venta) {
+                return $venta['estado'] === 'realizado';
+            });
+            $totalventasRealizadas = count($ventasRealizadas);
+            $totalventasPendientes = count($ventasPendientes);
+
+            return [
+                'totalventasRealizadas' => $totalventasRealizadas,
+                'totalventasPendientes' => $totalventasPendientes
+            ];
+        } else {
+            // Maneja el error si la solicitud no fue exitosa
+            return response()->json(['error' => 'Error al obtener los datos de la API'], $response->status());
+        }
+    } else {
+        // Maneja el caso donde no hay token de autenticación en la sesión
+        return response()->json(['error' => 'No se encontró token de autenticación en la sesión'], 401);
+    }
+}
+public function totalventasRealizadas()
+{
+    $data = $this->vistadash();
+    $totalventasRealizadas = $data['totalventasRealizadas'];
+    return $totalventasRealizadas;
+}
+public function totalventasPendientes()
+{
+    $data = $this->vistadash();
+    $totalventasPendientes = $data['totalventasPendientes'];
+    return $totalventasPendientes;
+}
+
 }

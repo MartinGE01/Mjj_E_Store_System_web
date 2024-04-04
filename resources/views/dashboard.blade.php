@@ -23,7 +23,9 @@
                         <span>{{ $totalProductos }}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('producto') }}">Ver Detalles</a>
+                    @if(session('departamento') == 'Admin' || session('departamento') == 'Almacenero')
+                        <a class="small text-white stretched-link" href="{{ route('reporteProducto') }}">Ver Detalles</a>
+                        @endif
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -32,10 +34,12 @@
                 <div class="card bg-warning text-white mb-4">
                     <div class="card-body d-flex justify-content-between">
                         <span>Productos vendidos</span>
-                        <span>0</span>
+                        <span>{{ $totalventasRealizadas }}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">Ver Detalles</a>
+                    @if(session('departamento') == 'Admin' || session('departamento') == 'Cajero')
+                        <a class="small text-white stretched-link" href="{{ route('ventafinalizada') }} ">Ver Detalles</a>
+                        @endif
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -47,7 +51,7 @@
                         <span>{{ $totalProductosActivos }}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">Ver Detalles</a>
+                        <a class="small text-white stretched-link" href="{{ route('productoDispon') }}">Ver Detalles</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -56,10 +60,12 @@
                 <div class="card bg-danger text-white mb-4">
                     <div class="card-body d-flex justify-content-between">
                         <span>Ordenes Pendientes</span>
-                        <span>0</span>
+                        <span>{{ $totalventasPendientes }}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">Ver Detalles</a>
+                    @if(session('departamento') == 'Admin' || session('departamento') == 'Cajero')
+                        <a class="small text-white stretched-link" href="{{ route('ventapendiente') }}">Ver Detalles</a>
+                        @endif
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -70,16 +76,16 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-area mr-1"></i>
-                        Area Chart Example
+                        Cantidad de Productos Vendidos por Dia
                     </div>
-                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                    <div class="card-body"><canvas id="myLineChart" width="100%" height="40"></canvas></div>
                 </div>
             </div>
             <div class="col-xl-6">
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-bar mr-1"></i>
-                        Bar Chart Example
+                        Productos por Categoria
                     </div>
                     <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                 </div>

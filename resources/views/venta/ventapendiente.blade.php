@@ -12,7 +12,7 @@
                     <thead>
                         <tr>
                             <th>Codigo</th>
-                            <th> Usuario</th>
+                            <th>Usuario</th>
                             <th>Nombre del Producto</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
@@ -23,22 +23,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                     
-                    <tr>
                     @foreach($ventas as $venta)
-                                <td>{{ $venta['id'] }}</td>
-                                <td>{{ $venta['nombre_usuario'] }}</td>
-                                <td>{{ $venta['nombre_producto'] }}</td>
-                                <td>{{ $venta['cantidad'] }}</td>
-                                <td>${{ $venta['precio_unitario'] }}</td>
-                                <td>${{ $venta['total_venta'] }}</td>
-                                <td>{{ $venta['estado'] }}</td>
-                                <td>{{ $venta['created_at'] }}</td>
-                                <td>
+                        <tr>
+                            <td>{{ $venta['id'] }}</td>
+                            <td>{{ $venta['nombre_usuario'] }}</td>
+                            <td>{{ $venta['nombre_producto'] }}</td>
+                            <td>{{ $venta['cantidad'] }}</td>
+                            <td>${{ $venta['precio_unitario'] }}</td>
+                            <td>${{ $venta['total_venta'] }}</td>
+                            <td>{{ $venta['estado'] }}</td>
+                            <td>{{ $venta['created_at'] }}</td>
+                            <td>
                                 <button class="btn btn-sm btn-info finalizar-venta-btn" data-id="{{ $venta['id'] }}">Finalizar Venta</button>
-                                </td>
-                            </tr>
-                            @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -49,7 +48,7 @@
 @section('script')
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Agregamos SweetAlert aquí -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     {{-- DataTables Buttons --}}
@@ -64,7 +63,7 @@
         $(document).ready(function() {
             $('#dataTable').DataTable({
                 columnDefs: [
-                    { targets: [8], orderable: false } // Desactivar la ordenación en la columna de acciones
+                    { targets: [8], orderable: false }
                 ],
                 dom: 'lBfrtip',
                 buttons: [
@@ -75,77 +74,28 @@
                 ]
             });
 
-            // Agregar evento de clic para los botones de eliminación
-            $('.delete-btn').on('click', function() {
-                var productId = $(this).data('id');
+            // Delegar evento de clic para los botones de finalizar venta
+            $('#dataTable').on('click', '.finalizar-venta-btn', function() {
+                var ventaId = $(this).data('id');
 
                 // Mostrar SweetAlert de confirmación
                 Swal.fire({
                     title: '¿Estás seguro?',
-                    text: "Esta acción no se puede revertir",
+                    text: "¿Quieres finalizar esta venta?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, eliminarlo'
+                    confirmButtonText: 'Sí, finalizarla'
                 }).then((result) => {
-                    // Si el usuario confirma, enviar la solicitud de eliminación
+                    // Si el usuario confirma, enviar la solicitud de finalización de venta
                     if (result.isConfirmed) {
-                        $.ajax({
-                            url: '{{ url("productos") }}/' + productId,
-                            type: 'DELETE',
-                            data: {
-                                "_token": "{{ csrf_token() }}"
-                            },
-                            success: function(response) {
-                                // Si la eliminación es exitosa, recargar la página
-                                if (response.success) {
-                                    // Mostrar alerta de éxito con SweetAlert
-                                    Swal.fire({
-                                        title: '¡Éxito!',
-                                        text: 'Producto eliminado correctamente',
-                                        icon: 'success'
-                                    }).then(() => {
-                                        location.reload();
-                                    });
-                                } else {
-                                    // Mostrar alerta de error con SweetAlert
-                                    Swal.fire({
-                                        title: '¡Error!',
-                                        text: 'Error al eliminar el producto',
-                                        icon: 'error'
-                                    });
-                                }
-                            }
-                        });
+                        // Redirigir a la ruta de finalizar venta con el ID de la venta
+                        window.location.href = "{{ url('ventas/finalizar') }}/" + ventaId;
                     }
                 });
             });
         });
-        $(document).ready(function() {
-        // Agregar evento de clic para los botones de finalizar venta
-        $('.finalizar-venta-btn').on('click', function() {
-            var ventaId = $(this).data('id');
-
-            // Mostrar SweetAlert de confirmación
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¿Quieres finalizar esta venta?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, finalizarla'
-            }).then((result) => {
-                // Si el usuario confirma, enviar la solicitud de finalización de venta
-                if (result.isConfirmed) {
-                    // Redirigir a la ruta de finalizar venta con el ID de la venta
-                    window.location.href = "{{ url('ventas/finalizar') }}/" + ventaId;
-                }
-            });
-        });
-    });
-    </script>
     </script>
 @if(session('error'))
     <script>
