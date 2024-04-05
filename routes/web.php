@@ -58,7 +58,7 @@ Route::middleware([AutVist::class])->group(function () {
     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
 
-    /*ventas*/
+    /*venta*/
     Route::get('/ventas-pendientes', [VentaController::class, 'index'])->name('ventapendiente');
     Route::get('/ventas-realizadas', [VentaController::class, 'finalizado'])->name('ventafinalizada');
     Route::post('/ruta/a/crear-venta', [VentaController::class, 'store']);
